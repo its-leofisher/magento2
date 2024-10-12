@@ -82,9 +82,8 @@ class Date extends AbstractDataType
             $storeTimeZone = $this->localeDate->getConfigTimezone();
             $config['storeTimeZone'] = $storeTimeZone;
         }
-        // Set date format pattern by current locale
-        $localeDateFormat = $this->localeDate->getDateFormat();
-        $config['options']['dateFormat'] = $localeDateFormat;
+        // Set date format pattern by component config override or current locale
+        $config['options']['dateFormat'] = $config['options']['dateFormat'] ?? $this->localeDate->getDateFormat();
         $config['options']['storeLocale'] = $this->locale;
         $this->setData('config', $config);
         parent::prepare();
